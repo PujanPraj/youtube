@@ -41,7 +41,8 @@ const Login = () => {
     try {
       const response = await axios.post(
         "http://localhost:8000/api/users/loginUser",
-        values
+        values,
+        { withCredentials: true }
       );
 
       if (response.data.success) {
