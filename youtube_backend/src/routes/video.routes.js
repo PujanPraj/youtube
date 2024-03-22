@@ -32,8 +32,9 @@ router
 router
   .route("/:videoId")
   .get(getAVideo)
-  .put(togglePublishStatus)
   .put(upload.single("thumbnail"), updateAVideo);
+
+router.route("/t/:videoId").put(togglePublishStatus);
 
 router.route("/:videoId").delete(deleteAVideo);
 

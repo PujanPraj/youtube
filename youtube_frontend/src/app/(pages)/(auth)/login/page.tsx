@@ -16,6 +16,8 @@ import Link from "next/link";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
+import cookies from "js-cookie";
+import { URL } from "@/constants/URL";
 
 const formSchema = z.object({
   email: z.string().email({
@@ -39,17 +41,15 @@ const Login = () => {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      const response = await axios.post(
-        "http://localhost:8000/api/users/loginUser",
-        values,
-        { withCredentials: true }
-      );
+      const response = await axios.post(`${URL}/users/loginUser`, values);
 
       if (response.data.success) {
+        const token = response.data.data.accessToken;
+        cookies.set("token", token);
+        localStorage.setItem("token", token);
         toast.success(response.data.message);
-        router.push("/profile");
+        router.push("/admin/dashboard");
       } else {
-        console.log("Login failed:", response.data.message);
         toast.error(response.data.message);
       }
     } catch (error) {

@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
-export default function Home() {
+const Navbar = () => {
   return (
     <div>
       <h1 className="text-center text-4xl mt-5">
@@ -16,7 +16,12 @@ export default function Home() {
         <Button>
           <Link href="/register">Register</Link>
         </Button>
+        <Button>
+          <Link href="/admin/dashboard">Dashboard</Link>
+        </Button>
       </div>
     </div>
   );
-}
+};
+
+export default Navbar;

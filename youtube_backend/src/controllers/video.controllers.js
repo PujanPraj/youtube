@@ -36,8 +36,8 @@ export const publishAVideo = asyncHandler(async (req, res) => {
 
   if (
     !req.files &&
-    Array.isArray(req.files.thumbnail) &&
-    req.files.thumbnail.length > 0
+    !Array.isArray(req.files.thumbnail) &&
+    !req.files.thumbnail.length > 0
   ) {
     throw new Error("thumbnail is required");
   }
@@ -320,7 +320,7 @@ export const getAllVideos = asyncHandler(async (req, res) => {
     limitStage,
   ]);
 
-  res.status(200).json(new ApiResponse(200, videos, "Get videos success"));
+  res.status(200).json(new ApiResponse(200, "Get videos success", videos));
 });
 
 //updage a video

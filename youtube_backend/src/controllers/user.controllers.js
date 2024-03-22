@@ -19,9 +19,9 @@ export const registerUser = asyncHandler(async (req, res) => {
   }
 
   //upload avatar using cloudinary
-  if (!avatar) {
-    throw new Error("Avatar file is required!!!");
-  }
+  // if (!avatar) {
+  //   throw new Error("Avatar file is required!!!");
+  // }
 
   let uploadedAvatar;
   if (avatar) {
@@ -73,8 +73,8 @@ export const loginUser = asyncHandler(async (req, res) => {
       const accessToken = await generateAccessToken(user._id);
       const refreshToken = await generateRefreshToken(user._id);
 
-      user.refreshToken = refreshToken;
-      user.save();
+      // user.refreshToken = refreshToken;
+      // user.save();
 
       const options = {
         httpOnly: true,

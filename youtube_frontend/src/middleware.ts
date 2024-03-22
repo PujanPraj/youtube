@@ -6,10 +6,10 @@ export function middleware(request: NextRequest) {
 
   const isPublicPath = path === "/login" || path === "/register";
 
-  const token = request.cookies.get("accessToken")?.value || "";
+  const token = request.cookies.get("token")?.value || "";
 
   if (isPublicPath && token) {
-    return NextResponse.redirect(new URL("/profile", request.nextUrl));
+    return NextResponse.redirect(new URL("/admin/dashboard", request.nextUrl));
   }
 
   if (!isPublicPath && !token) {
@@ -18,5 +18,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/", "/profile/:path*", "/login", "/register"],
+  matcher: ["/admin/:path*", "/login", "/register"],
 };
